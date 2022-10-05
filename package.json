@@ -51,7 +51,7 @@
     "@feathersjs/socketio": "^5.0.0-pre.29",
     "@feathersjs/transport-commons": "^5.0.0-pre.29",
     "feathers-authentication-management": "^4.0.2",
-    "feathers-hooks-common": "^6.1.5",
+    "feathers-hooks-common": "^7.0.0-pre.1",
     "knex": "^2.3.0",
     "koa-static": "^5.0.0",
     "sqlite3": "^5.1.2",
