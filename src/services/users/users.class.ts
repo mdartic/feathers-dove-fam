@@ -2,6 +2,8 @@ import { KnexService } from '@feathersjs/knex'
 import type { KnexAdapterParams } from '@feathersjs/knex'
 import { resolveAll } from '@feathersjs/schema'
 import { authenticate } from '@feathersjs/authentication'
+import { addVerification } from 'feathers-authentication-management'
+import { iff, isProvider, disallow } from 'feathers-hooks-common'
 import type { UsersData, UsersResult, UsersQuery } from './users.schema'
 import { usersResolvers } from './users.resolver'
 
@@ -15,7 +17,17 @@ export const usersHooks = {
     update: [authenticate('jwt'), resolveAll(usersResolvers)],
     remove: [authenticate('jwt'), resolveAll(usersResolvers)]
   },
-  before: {},
+  before: {
+    create: [
+      addVerification(),
+    ],
+    patch: [
+      iff(
+        isProvider('external'),
+        disallow()
+      )
+    ]
+  },
   after: {},
   error: {}
 }
